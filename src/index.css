@@ -1,5 +1,19 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-markdown-neutral-900: hsl(225, 9%, 9%);
+  --color-markdown-neutral-700: hsl(216, 9%, 23%);
+  --color-markdown-neutral-300: hsl(222, 9%, 78%);
+  --color-markdown-neutral-200: hsl(0, 0%, 89%);
+  --color-markdown-neutral-100: hsl(0, 0%, 96%);
+  --color-markdown-zinc-900: hsl(216, 8%, 12%);
+  --color-markdown-zinc-800: hsl(220, 7%, 18%);
+  --color-markdown-zinc-500: hsl(213, 4%, 51%);
+  --color-markdown-gray-600: hsl(216, 8%, 38%);
+  --color-markdown-orange-500: hsl(13, 75%, 58%);
+  --color-markdown-orange-300: hsl(21, 86%, 67%);
+}
+
 @font-face {
   font-family: 'Roboto Slab';
   src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
