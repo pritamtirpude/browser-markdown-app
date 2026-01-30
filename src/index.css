@@ -12,12 +12,35 @@
   --color-markdown-gray-600: hsl(216, 8%, 38%);
   --color-markdown-orange-500: hsl(13, 75%, 58%);
   --color-markdown-orange-300: hsl(21, 86%, 67%);
+
+  --font-robotomono: 'Roboto Mono', monospace;
+
+  --text-robotomono-regular: 0.875rem; /* 14px */
+  --text-robotomono-regular--line-height: 1.5rem; /* 24px */
+
+  --text-robotoslab-regularhm: 0.938rem; /* 15px */
+
+  --text-robotoslab-regularhs: 0.875rem; /* 14px */
+  --text-robotoslab-regularhs--letter-spacing: 0.125rem; /* 2px */
+
+  --text-robotoslab-regular: 0.875rem; /* 14px */
+  --text-robotoslab-regular--line-height: 1.5rem; /* 24px */
+
+  --text-robotoslab-lightbody: 0.813rem; /* 13px */
 }
 
 @font-face {
   font-family: 'Roboto Slab';
   src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
   font-display: swap;
   font-style: normal;
 }
