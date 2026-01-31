@@ -6,7 +6,7 @@ function HamburgerMenu() {
   return (
     <MotionConfig transition={{ duration: 0.2 }}>
       <button
-        className="bg-markdown-neutral-700 flex cursor-pointer flex-col items-center justify-center gap-1.5 px-5 py-7"
+        className="bg-markdown-neutral-700 hover:bg-markdown-orange-500 flex cursor-pointer flex-col items-center justify-center gap-1.5 px-5 py-7 transition-all duration-200"
         aria-label={isHamburgerMenuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isHamburgerMenuOpen}
         onClick={toggleHamburgerMenu}

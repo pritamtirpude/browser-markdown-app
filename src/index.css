@@ -14,19 +14,28 @@
   --color-markdown-orange-300: hsl(21, 86%, 67%);
 
   --font-robotomono: 'Roboto Mono', monospace;
+  --font-robotoslab: 'Roboto Slab', serif;
 
   --text-robotomono-regular: 0.875rem; /* 14px */
   --text-robotomono-regular--line-height: 1.5rem; /* 24px */
 
-  --text-robotoslab-regularhm: 0.938rem; /* 15px */
+  --text-roboto-regular: 0.938rem; /* 15px */
 
-  --text-robotoslab-regularhs: 0.875rem; /* 14px */
-  --text-robotoslab-regularhs--letter-spacing: 0.125rem; /* 2px */
+  --text-roboto-regularhs: 0.875rem; /* 14px */
+  --text-roboto-regularhs--letter-spacing: 0.125rem; /* 2px */
 
   --text-robotoslab-regular: 0.875rem; /* 14px */
   --text-robotoslab-regular--line-height: 1.5rem; /* 24px */
 
-  --text-robotoslab-lightbody: 0.813rem; /* 13px */
+  --text-roboto-lightbody: 0.813rem; /* 13px */
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
@@ -46,5 +55,5 @@
 }
 
 body {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Roboto', sans-serif;
 }
