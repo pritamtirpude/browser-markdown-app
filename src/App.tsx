@@ -1,7 +1,9 @@
+import { Navbar } from '@/components';
+
 function App() {
   return (
     <div>
-      <h1 className="text-7xl">Markdown Editor</h1>
+      <Navbar />
     </div>
   );
 }
