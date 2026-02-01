@@ -3,7 +3,7 @@ import { Trash2 } from 'lucide-react';
 
 function Navbar() {
   return (
-    <nav className="bg-markdown-zinc-800 flex">
+    <nav className="bg-markdown-zinc-800 flex w-full">
       <HamburgerMenu />
       <div className="flex w-full items-center justify-between p-4">
         <div className="flex items-center gap-7.5">
