@@ -1,17 +1,10 @@
-import { useState } from 'react';
-
-const initialMarkdown = `# Welcome to Markdown
-
-Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents.
-
-## How to use this?
-
-1. Write markdown in the markdown editor window
-2. See the rendered markdown in the preview window
-`;
+import { db } from '@/indexeddb/db';
+import { useMarkdownStore } from '@/store/markdownStore';
+import { useLiveQuery } from 'dexie-react-hooks';
 
 function MarkdownEditor() {
-  const [content, setContent] = useState(initialMarkdown);
+  const { setMarkdownContent, markdownContent } = useMarkdownStore();
+  const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
 
   return (
     <div className="min-h-screen flex-1">
@@ -19,8 +12,8 @@ function MarkdownEditor() {
         <h3 className="text-markdown-zinc-500 text-roboto-regularhs uppercase">Markdown</h3>
       </div>
       <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        value={markdownContent || defaultDocument?.content || ''}
+        onChange={(e) => setMarkdownContent(e.target.value)}
         className="text-robotomono-regular font-robotomono text-markdown-neutral-700 min-h-screen w-full resize-none p-4 focus:outline-none"
       />
     </div>

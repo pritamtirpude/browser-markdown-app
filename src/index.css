@@ -27,6 +27,13 @@
   --text-robotoslab-regular: 0.875rem; /* 14px */
   --text-robotoslab-regular--line-height: 1.5rem; /* 24px */
 
+  --text-robotoslab-h1: 2rem; /* 32px */
+  --text-robotoslab-h2: 1.75rem; /* 28px */
+  --text-robotoslab-h3: 1.5rem; /* 24px */
+  --text-robotoslab-h4: 1.25rem; /* 20px */
+  --text-robotoslab-h5: 1rem; /* 16px */
+  --text-robotoslab-h6: 0.875rem; /* 14px */
+
   --text-roboto-lightbody: 0.813rem; /* 13px */
 }
 
@@ -58,4 +65,46 @@ body {
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
+}
+
+.markdown-preview h1 {
+  font-size: var(--text-robotoslab-h1);
+  font-family: var(--font-robotoslab);
+  font-weight: bold;
+}
+.markdown-preview h2 {
+  font-size: var(--text-robotoslab-h2);
+  font-family: var(--font-robotoslab);
+  font-weight: 300;
+}
+
+.markdown-preview h3 {
+  font-size: var(--text-robotoslab-h3);
+  font-family: var(--font-robotoslab);
+  font-weight: bold;
+}
+
+.markdown-preview h4 {
+  font-size: var(--text-robotoslab-h4);
+  font-family: var(--font-robotoslab);
+  font-weight: bold;
+}
+
+.markdown-preview h5 {
+  font-size: var(--text-robotoslab-h5);
+  font-family: var(--font-robotoslab);
+  font-weight: bold;
+}
+.markdown-preview h6 {
+  font-size: var(--text-robotoslab-h6);
+  font-family: var(--font-robotoslab);
+  font-weight: bold;
+}
+
+.markdown-preview p {
+  font-size: var(--text-robotoslab-regular);
+  line-height: var(--text-robotoslab-regular--line-height);
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  color: var(--color-markdown-zinc-500);
 }

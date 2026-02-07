@@ -1,6 +1,6 @@
 // utils/markdown.ts
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
@@ -19,10 +19,7 @@ export async function renderMarkdown(markdown: string): Promise<MarkdownResult> 
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeSlug)
-    .use(rehypeAutolinkHeadings, {
-      behavior: 'wrap',
-      properties: { className: ['anchor'] },
-    })
+    .use(rehypeSanitize)
     .use(rehypeStringify)
     .process(markdown);
 

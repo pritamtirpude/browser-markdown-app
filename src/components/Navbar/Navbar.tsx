@@ -1,7 +1,36 @@
-import { Button, HamburgerMenu } from '@/components';
+import { Button, FilenameInput, HamburgerMenu } from '@/components';
+import { useMarkdownParams } from '@/hooks/useMarkdownParams';
+import { db } from '@/indexeddb/db';
+import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
+import { useMarkdownStore } from '@/store/markdownStore';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { Trash2 } from 'lucide-react';
+import { useEffect } from 'react';
 
 function Navbar() {
+  const { params, setParams } = useMarkdownParams();
+  const filename = useMarkdownStore((state) => state.filename);
+  const markdownContent = useMarkdownStore((state) => state.markdownContent);
+  const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
+  const documents = useLiveQuery(() => db.table('documents').toArray());
+
+  const theDocument = documents?.find((doc) => doc.id === defaultDocument?.id);
+
+  const handleSave = async () => {
+    if (!filename && !markdownContent) {
+      alert('Please enter a filename and content before saving.');
+      return;
+    }
+
+    await addOrUpdateDocument(filename, markdownContent, params.id ?? undefined);
+  };
+
+  useEffect(() => {
+    if (theDocument?.id) {
+      setParams({ id: theDocument.id });
+    }
+  }, [theDocument?.id, setParams]);
+
   return (
     <nav className="bg-markdown-zinc-800 flex w-full">
       <HamburgerMenu />
@@ -20,14 +49,14 @@ function Navbar() {
                 <h1 className="text-roboto-lightbody text-markdown-zinc-500 hidden md:block">
                   Document Name
                 </h1>
-                <h2 className="text-roboto-regular text-white">welcome.md</h2>
+                <FilenameInput />
               </div>
             </div>
           </div>
         </div>
         <div className="flex items-center gap-2.5">
           <Trash2 className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200" />
-          <Button title="Save Changes" icon="/assets/icon-save.svg" />
+          <Button title="Save Changes" icon="/assets/icon-save.svg" handleEvent={handleSave} />
         </div>
       </div>
     </nav>

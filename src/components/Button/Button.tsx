@@ -3,14 +3,16 @@ import { cn } from '@/util';
 type ButtonProps = {
   title: string;
   icon?: string;
+  handleEvent?: () => void;
 };
-function Button({ title, icon }: ButtonProps) {
+function Button({ title, icon, handleEvent }: ButtonProps) {
   return (
     <button
       className={cn(
         'bg-markdown-orange-500 group text-roboto-regular relative z-50 flex cursor-pointer items-center overflow-hidden rounded-sm p-4 text-white md:px-4 md:py-2.5',
         icon ? 'gap-2' : '',
       )}
+      onClick={handleEvent}
     >
       {icon && <img src={icon} alt={`${title} icon`} />}
       <span className="hidden md:block">{title}</span>
