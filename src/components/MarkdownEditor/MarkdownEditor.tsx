@@ -12,6 +12,8 @@ function MarkdownEditor() {
         <h3 className="text-markdown-zinc-500 text-roboto-regularhs uppercase">Markdown</h3>
       </div>
       <textarea
+        id="markdown"
+        name="markdown"
         value={markdownContent || defaultDocument?.content || ''}
         onChange={(e) => setMarkdownContent(e.target.value)}
         className="text-robotomono-regular font-robotomono text-markdown-neutral-700 min-h-screen w-full resize-none p-4 focus:outline-none"

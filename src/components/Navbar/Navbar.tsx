@@ -1,20 +1,18 @@
 import { Button, FilenameInput, HamburgerMenu } from '@/components';
-import { useMarkdownParams } from '@/hooks/useMarkdownParams';
 import { db } from '@/indexeddb/db';
 import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Trash2 } from 'lucide-react';
-import { useEffect } from 'react';
 
 function Navbar() {
-  const { params, setParams } = useMarkdownParams();
-  const filename = useMarkdownStore((state) => state.filename);
-  const markdownContent = useMarkdownStore((state) => state.markdownContent);
+  const { markdownContent, filename, documentId, setDocumentId } = useMarkdownStore(
+    (state) => state,
+  );
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
-  const documents = useLiveQuery(() => db.table('documents').toArray());
+  const documents = useLiveQuery(() => db.table('documents').orderBy('createdAt').reverse().toArray());
 
-  const theDocument = documents?.find((doc) => doc.id === defaultDocument?.id);
+  const markdownDocument = documents?.find((doc) => doc.id === documentId || defaultDocument?.id);
 
   const handleSave = async () => {
     if (!filename && !markdownContent) {
@@ -22,14 +20,13 @@ function Navbar() {
       return;
     }
 
-    await addOrUpdateDocument(filename, markdownContent, params.id ?? undefined);
+    await addOrUpdateDocument(
+      filename,
+      markdownContent,
+      markdownDocument?.id ?? undefined,
+      setDocumentId,
+    );
   };
-
-  useEffect(() => {
-    if (theDocument?.id) {
-      setParams({ id: theDocument.id });
-    }
-  }, [theDocument?.id, setParams]);
 
   return (
     <nav className="bg-markdown-zinc-800 flex w-full">

@@ -3,24 +3,69 @@ import { useMarkdownStore } from '@/store/markdownStore';
 import { renderMarkdown } from '@/util/markdown';
 import { useLiveQuery } from 'dexie-react-hooks';
 import parse from 'html-react-parser';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function MarkdownPreview() {
-  const { markdownContent } = useMarkdownStore();
+  const { markdownContent, documentId, setFilename, setMarkdownContent, setDocumentId } =
+    useMarkdownStore();
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
-  const documents = useLiveQuery(() => db.table('documents').toArray());
-
-  const theDocument = documents?.find((doc) => doc.id === defaultDocument?.id);
+  const documents = useLiveQuery(() =>
+    db.table('documents').orderBy('createdAt').reverse().toArray(),
+  );
 
   const [html, setHtml] = useState('');
 
+  // Memoized render function - returns the rendered result without setting state
+  const parseMarkdown = useCallback(async (content: string) => {
+    if (!content) return '';
+    const res = await renderMarkdown(content);
+    return res.markup;
+  }, []);
+
+  // Initialize with default document on page load
   useEffect(() => {
-    if (theDocument) {
-      renderMarkdown(markdownContent || theDocument.content).then((res) => {
-        setHtml(res.markup);
-      });
+    if (!documentId && documents && documents.length > 0) {
+      if (documents.length === 1) {
+        // Only one document - use default document
+        setDocumentId(defaultDocument?.id || '');
+        setFilename(defaultDocument?.title);
+        setMarkdownContent(defaultDocument?.content);
+        parseMarkdown(defaultDocument?.content || '').then(setHtml);
+      } else {
+        // Multiple documents - load the first one (newest)
+        const firstDocument = documents[0];
+        setDocumentId(firstDocument.id);
+        setFilename(firstDocument.title);
+        setMarkdownContent(firstDocument.content);
+        parseMarkdown(firstDocument.content || '').then(setHtml);
+      }
     }
-  }, [theDocument, markdownContent]);
+  }, [
+    defaultDocument,
+    documents,
+    setFilename,
+    setMarkdownContent,
+    setDocumentId,
+    documentId,
+    parseMarkdown,
+  ]);
+
+  // Render markdown when content changes
+  useEffect(() => {
+    if (markdownContent) {
+      parseMarkdown(markdownContent).then(setHtml);
+    }
+  }, [markdownContent, parseMarkdown]);
+
+  useEffect(() => {
+    const document = documents?.find((doc) => doc.id === documentId);
+
+    if (document) {
+      setFilename(document.title);
+      setMarkdownContent(document.content);
+      parseMarkdown(document.content).then(setHtml);
+    }
+  }, [documents, documentId, setFilename, setMarkdownContent, parseMarkdown]);
 
   return (
     <div className="min-h-screen flex-1">

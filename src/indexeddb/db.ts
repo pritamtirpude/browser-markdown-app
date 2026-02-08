@@ -1,16 +1,18 @@
 import Dexie, { type EntityTable } from 'dexie';
 import { v4 as uuid } from 'uuid';
 
-type MarkdownDocument = {
+export type MarkdownDocument = {
   id: string;
   title: string;
   content: string;
+  createdAt: string;
 };
 
-type DefaultMarkdownDocument = {
+export type DefaultMarkdownDocument = {
   id: string;
   title: string;
   content: string;
+  createdAt: string;
 };
 
 export const db = new Dexie('MarkdownEditorDB') as Dexie & {
@@ -19,8 +21,8 @@ export const db = new Dexie('MarkdownEditorDB') as Dexie & {
 };
 
 db.version(1).stores({
-  documents: '++id, title, content',
-  defaultDocument: 'id, title, content',
+  documents: '++id, title, content, createdAt',
+  defaultDocument: 'id, title, content, createdAt',
 });
 
 const defaultContent = `# Welcome to Markdown
@@ -67,10 +69,12 @@ db.on('populate', (tx) => {
     id: defaultId,
     title: 'untitled.md',
     content: defaultContent,
+    createdAt: new Date().toISOString(),
   });
   tx.table('documents').put({
     id: defaultId,
     title: 'untitled.md',
     content: defaultContent,
+    createdAt: new Date().toISOString(),
   });
 });

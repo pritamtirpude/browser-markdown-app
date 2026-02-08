@@ -7,6 +7,8 @@ function FilenameInput() {
     setFilename(e.target.value);
   };
 
+  console.log('filename', filename);
+
   return (
     <input
       type="text"

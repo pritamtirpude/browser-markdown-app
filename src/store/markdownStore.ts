@@ -5,11 +5,15 @@ type MarkdownStoreState = {
   setMarkdownContent: (content: string) => void;
   filename: string;
   setFilename: (filename: string) => void;
+  documentId: string;
+  setDocumentId: (id: string) => void;
 };
 
 export const useMarkdownStore = create<MarkdownStoreState>((set) => ({
   markdownContent: '',
   setMarkdownContent: (content) => set({ markdownContent: content }),
-  filename: 'Untitled Document',
+  filename: '',
   setFilename: (filename) => set({ filename }),
+  documentId: '',
+  setDocumentId: (id) => set({ documentId: id }),
 }));
