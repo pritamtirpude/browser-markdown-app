@@ -1,16 +1,21 @@
-import { Button, FilenameInput, HamburgerMenu } from '@/components';
+import { Button, DeleteModal, FilenameInput, HamburgerMenu } from '@/components';
 import { db } from '@/indexeddb/db';
 import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
+import { useNavbarStore } from '@/store/navbarStore';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Trash2 } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
 
 function Navbar() {
   const { markdownContent, filename, documentId, setDocumentId } = useMarkdownStore(
     (state) => state,
   );
+  const { isDeleteConfirmationOpen, setDeleteConfirmation } = useNavbarStore();
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
-  const documents = useLiveQuery(() => db.table('documents').orderBy('createdAt').reverse().toArray());
+  const documents = useLiveQuery(() =>
+    db.table('documents').orderBy('createdAt').reverse().toArray(),
+  );
 
   const markdownDocument = documents?.find((doc) => doc.id === documentId || defaultDocument?.id);
 
@@ -52,10 +57,14 @@ function Navbar() {
           </div>
         </div>
         <div className="flex items-center gap-2.5">
-          <Trash2 className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200" />
+          <Trash2
+            onClick={() => setDeleteConfirmation(true)}
+            className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200"
+          />
           <Button title="Save Changes" icon="/assets/icon-save.svg" handleEvent={handleSave} />
         </div>
       </div>
+      <AnimatePresence>{isDeleteConfirmationOpen ? <DeleteModal /> : null}</AnimatePresence>
     </nav>
   );
 }

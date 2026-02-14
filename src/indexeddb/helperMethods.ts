@@ -20,3 +20,11 @@ export const addOrUpdateDocument = async (
     console.error('Error saving document:', error);
   }
 };
+
+export const deleteDocument = async (id: string) => {
+  try {
+    await db.table('documents').delete(id);
+  } catch (error) {
+    console.error('Error deleting document:', error);
+  }
+};
