@@ -1,13 +1,22 @@
 import { db } from '@/indexeddb/db';
 import { useMarkdownStore } from '@/store/markdownStore';
+import { cn } from '@/util';
 import { renderMarkdown } from '@/util/markdown';
 import { useLiveQuery } from 'dexie-react-hooks';
 import parse from 'html-react-parser';
+import { Eye, EyeOff } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
 function MarkdownPreview() {
-  const { markdownContent, documentId, setFilename, setMarkdownContent, setDocumentId } =
-    useMarkdownStore();
+  const {
+    markdownContent,
+    documentId,
+    setFilename,
+    setMarkdownContent,
+    setDocumentId,
+    setIsPreviewOpen,
+    isPreviewOpen,
+  } = useMarkdownStore();
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
   const documents = useLiveQuery(() =>
     db.table('documents').orderBy('createdAt').reverse().toArray(),
@@ -68,12 +77,37 @@ function MarkdownPreview() {
   }, [documents, documentId, setFilename, setMarkdownContent, parseMarkdown]);
 
   return (
-    <div className="min-h-screen flex-1">
-      <div className="bg-markdown-neutral-100 px-4 py-3">
+    <div
+      className={cn(
+        'hidden min-h-screen w-full flex-1 overflow-x-hidden md:block',
+        isPreviewOpen ? 'block' : 'hidden',
+      )}
+    >
+      <div className="bg-markdown-neutral-100 flex items-center justify-between px-4 py-3">
         <h3 className="text-markdown-zinc-500 text-roboto-regularhs uppercase">Preview</h3>
+        <div title="Preview Markdown">
+          {isPreviewOpen ? (
+            <EyeOff
+              className="text-markdown-zinc-500 cursor-pointer"
+              onClick={() => setIsPreviewOpen(false)}
+            />
+          ) : (
+            <Eye
+              className="text-markdown-zinc-500 cursor-pointer"
+              onClick={() => setIsPreviewOpen(true)}
+            />
+          )}
+        </div>
       </div>
 
-      <div className="markdown-preview min-h-screen p-6">{parse(html)}</div>
+      <div
+        className={cn(
+          'markdown-preview min-h-screen w-full px-4 py-3 md:p-6',
+          isPreviewOpen ? 'lg:mx-auto lg:max-w-3xl' : 'block',
+        )}
+      >
+        {parse(html)}
+      </div>
     </div>
   );
 }

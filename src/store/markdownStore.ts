@@ -7,6 +7,8 @@ type MarkdownStoreState = {
   setFilename: (filename: string) => void;
   documentId: string;
   setDocumentId: (id: string) => void;
+  isPreviewOpen: boolean;
+  setIsPreviewOpen: (isOpen: boolean) => void;
 };
 
 export const useMarkdownStore = create<MarkdownStoreState>((set) => ({
@@ -16,4 +18,6 @@ export const useMarkdownStore = create<MarkdownStoreState>((set) => ({
   setFilename: (filename) => set({ filename }),
   documentId: '',
   setDocumentId: (id) => set({ documentId: id }),
+  isPreviewOpen: false,
+  setIsPreviewOpen: (isOpen) => set({ isPreviewOpen: isOpen }),
 }));

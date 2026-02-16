@@ -27,7 +27,7 @@ db.version(1).stores({
 
 const defaultContent = `# Welcome to Markdown
 
-Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents an the Pritam Tirpude is awesome man.
+Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents.
 
 ## How to use this?
 

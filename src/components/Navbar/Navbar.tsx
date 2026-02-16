@@ -56,11 +56,13 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2.5">
-          <Trash2
-            onClick={() => setDeleteConfirmation(true)}
-            className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200"
-          />
+        <div className="flex items-center gap-6">
+          <div>
+            <Trash2
+              onClick={() => setDeleteConfirmation(true)}
+              className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200"
+            />
+          </div>
           <Button title="Save Changes" icon="/assets/icon-save.svg" handleEvent={handleSave} />
         </div>
       </div>

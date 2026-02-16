@@ -13,7 +13,7 @@ function FilenameInput() {
       id="filename"
       name="filename"
       value={filename}
-      className="text-roboto-regular w-100 border-b border-transparent text-white transition-all duration-200 focus:border-white focus:outline-none"
+      className="text-roboto-regular w-20 border-b border-transparent text-white transition-all duration-200 focus:border-white focus:outline-none md:w-100"
       onChange={handleChange}
     />
   );

@@ -1,15 +1,32 @@
 import { db } from '@/indexeddb/db';
 import { useMarkdownStore } from '@/store/markdownStore';
+import { cn } from '@/util';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { Eye, EyeOff } from 'lucide-react';
 
 function MarkdownEditor() {
-  const { setMarkdownContent, markdownContent } = useMarkdownStore();
+  const { setMarkdownContent, markdownContent, isPreviewOpen, setIsPreviewOpen } =
+    useMarkdownStore();
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
 
   return (
-    <div className="min-h-screen flex-1">
-      <div className="bg-markdown-neutral-100 px-4 py-3">
+    <div className={cn('min-h-screen w-full flex-1', isPreviewOpen ? 'hidden' : 'block')}>
+      <div className="bg-markdown-neutral-100 flex items-center justify-between px-4 py-3">
         <h3 className="text-markdown-zinc-500 text-roboto-regularhs uppercase">Markdown</h3>
+
+        <div className="block md:hidden">
+          {isPreviewOpen ? (
+            <EyeOff
+              className="text-markdown-zinc-500 cursor-pointer"
+              onClick={() => setIsPreviewOpen(false)}
+            />
+          ) : (
+            <Eye
+              className="text-markdown-zinc-500 cursor-pointer"
+              onClick={() => setIsPreviewOpen(true)}
+            />
+          )}
+        </div>
       </div>
       <textarea
         id="markdown"
