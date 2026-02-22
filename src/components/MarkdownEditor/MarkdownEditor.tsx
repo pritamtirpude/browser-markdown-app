@@ -11,8 +11,8 @@ function MarkdownEditor() {
 
   return (
     <div className={cn('min-h-screen w-full flex-1', isPreviewOpen ? 'hidden' : 'block')}>
-      <div className="bg-markdown-neutral-100 flex items-center justify-between px-4 py-3">
-        <h3 className="text-markdown-zinc-500 text-roboto-regularhs uppercase">Markdown</h3>
+      <div className="bg-markdown-neutral-100 dark:bg-markdown-zinc-900 flex items-center justify-between px-4 py-3">
+        <h3 className="text-markdown-zinc-500 dark:text-markdown-neutral-300  text-roboto-regularhs uppercase">Markdown</h3>
 
         <div className="block md:hidden">
           {isPreviewOpen ? (
@@ -33,7 +33,7 @@ function MarkdownEditor() {
         name="markdown"
         value={markdownContent || defaultDocument?.content || ''}
         onChange={(e) => setMarkdownContent(e.target.value)}
-        className="text-robotomono-regular font-robotomono text-markdown-neutral-700 min-h-screen w-full resize-none p-4 focus:outline-none"
+        className="text-robotomono-regular dark:bg-markdown-neutral-900 overflow-y-hidden dark:text-markdown-neutral-300 font-robotomono text-markdown-neutral-700 min-h-screen w-full resize-none p-4 focus:outline-none"
       />
     </div>
   );

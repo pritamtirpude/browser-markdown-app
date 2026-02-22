@@ -1,4 +1,4 @@
-import { Button, DocumentList } from '@/components';
+import { Button, DocumentList, ThemeSwitcher } from '@/components';
 import { db } from '@/indexeddb/db';
 import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
@@ -52,7 +52,7 @@ function Sidebar() {
       </div>
 
       <div>
-        <span className="text-roboto-lightbody text-markdown-zinc-500">Theme</span>
+        <ThemeSwitcher />
       </div>
     </motion.aside>
   );

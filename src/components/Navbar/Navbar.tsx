@@ -34,7 +34,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-markdown-zinc-800 flex w-full">
+    <nav className="bg-markdown-zinc-800 sticky inset-0 z-50 flex w-full">
       <HamburgerMenu />
       <div className="flex w-full items-center justify-between p-4">
         <div className="flex items-center gap-7.5">

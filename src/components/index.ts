@@ -9,6 +9,7 @@ import MarkdownEditor from '@/components/MarkdownEditor/MarkdownEditor';
 import MarkdownPreview from '@/components/MarkdownPreview/MarkdownPreview';
 import Navbar from '@/components/Navbar/Navbar';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   MarkdownPreview,
   Navbar,
   Sidebar,
+  ThemeSwitcher,
 };

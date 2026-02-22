@@ -83,8 +83,8 @@ function MarkdownPreview() {
         isPreviewOpen ? 'block' : 'hidden',
       )}
     >
-      <div className="bg-markdown-neutral-100 flex items-center justify-between px-4 py-3">
-        <h3 className="text-markdown-zinc-500 text-roboto-regularhs uppercase">Preview</h3>
+      <div className="bg-markdown-neutral-100 dark:bg-markdown-zinc-900 flex items-center justify-between px-4 py-3">
+        <h3 className="text-markdown-zinc-500 dark:text-markdown-neutral-300 text-roboto-regularhs uppercase">Preview</h3>
         <div title="Preview Markdown">
           {isPreviewOpen ? (
             <EyeOff
@@ -102,7 +102,7 @@ function MarkdownPreview() {
 
       <div
         className={cn(
-          'markdown-preview min-h-screen w-full px-4 py-3 md:p-6',
+          'markdown-preview min-h-screen dark:bg-markdown-neutral-900 w-full px-4 py-3 md:p-6',
           isPreviewOpen ? 'lg:mx-auto lg:max-w-3xl' : 'block',
         )}
       >

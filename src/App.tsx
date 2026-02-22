@@ -6,10 +6,13 @@ function App() {
   const { isHamburgerMenuOpen } = useNavbarStore();
 
   return (
-    <div>
+    <div className='relative'>
       <AnimatePresence mode="wait">{isHamburgerMenuOpen && <Sidebar />}</AnimatePresence>
       <motion.main
-        animate={{ x: isHamburgerMenuOpen ? 250 : 0 }}
+        className='dark:bg-markdown-neutral-900'
+        animate={{
+          x: isHamburgerMenuOpen ? 250 : 0,
+        }}
         transition={{ ease: 'easeInOut', duration: 0.3 }}
       >
         <Navbar />
