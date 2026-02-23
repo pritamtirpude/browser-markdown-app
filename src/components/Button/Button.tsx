@@ -4,8 +4,9 @@ type ButtonProps = {
   title: string;
   icon?: string;
   handleEvent?: () => void;
+  isMobile?: boolean;
 };
-function Button({ title, icon, handleEvent }: ButtonProps) {
+function Button({ title, icon, handleEvent, isMobile }: ButtonProps) {
   return (
     <button
       autoFocus={false}
@@ -16,7 +17,8 @@ function Button({ title, icon, handleEvent }: ButtonProps) {
       onClick={handleEvent}
     >
       {icon && <img src={icon} alt={`${title} icon`} />}
-      <span className="hidden md:block">{title}</span>
+      {icon && <span className="hidden md:block">{title}</span>}
+      {!icon && isMobile && <span className="block">{title}</span>}
 
       <div className="group-hover:bg-markdown-orange-300 absolute inset-0 top-full -z-20 size-full transition-all duration-200 ease-in-out group-hover:top-0" />
     </button>

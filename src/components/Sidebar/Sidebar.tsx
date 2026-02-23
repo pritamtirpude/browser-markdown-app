@@ -33,10 +33,10 @@ function Sidebar() {
         x: '-100%',
       }}
       className={cn(
-        'bg-markdown-zinc-900 fixed inset-0 flex min-h-screen w-62.5 flex-col justify-between p-6',
+        'bg-markdown-zinc-900 fixed inset-0 flex h-full w-62.5 flex-col  p-6',
       )}
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-1 flex-col gap-6">
         <div>
           <img className="lg:hidden" src="/assets/logo.svg" alt="markdown logo" loading="lazy" />
         </div>
@@ -47,7 +47,7 @@ function Sidebar() {
         </div>
         <DocumentList />
         <div>
-          <Button title="New Document" handleEvent={handleNewDocument} />
+          <Button isMobile={true} title="New Document" handleEvent={handleNewDocument} />
         </div>
       </div>
 

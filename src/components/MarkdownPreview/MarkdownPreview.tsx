@@ -5,6 +5,7 @@ import { renderMarkdown } from '@/util/markdown';
 import { useLiveQuery } from 'dexie-react-hooks';
 import parse from 'html-react-parser';
 import { Eye, EyeOff } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useCallback, useEffect, useState } from 'react';
 
 function MarkdownPreview() {
@@ -77,15 +78,17 @@ function MarkdownPreview() {
   }, [documents, documentId, setFilename, setMarkdownContent, parseMarkdown]);
 
   return (
-    <div
+    <motion.div
+      layout
+      layoutId='preview-container'
       className={cn(
         'hidden min-h-screen w-full flex-1 overflow-x-hidden md:block',
         isPreviewOpen ? 'block' : 'hidden',
       )}
     >
-      <div className="bg-markdown-neutral-100 dark:bg-markdown-zinc-900 flex items-center justify-between px-4 py-3">
-        <h3 className="text-markdown-zinc-500 dark:text-markdown-neutral-300 text-roboto-regularhs uppercase">Preview</h3>
-        <div title="Preview Markdown">
+      <motion.div layout layoutId='preview-header' className="bg-markdown-neutral-100 dark:bg-markdown-zinc-900 flex items-center justify-between px-4 py-3">
+        <motion.h3 layout layoutId='preview-header-title' className="text-markdown-zinc-500 dark:text-markdown-neutral-300 text-roboto-regularhs uppercase">Preview</motion.h3>
+        <motion.div layout layoutId='preview-header-icon' title="Preview Markdown">
           {isPreviewOpen ? (
             <EyeOff
               className="text-markdown-zinc-500 cursor-pointer"
@@ -97,18 +100,20 @@ function MarkdownPreview() {
               onClick={() => setIsPreviewOpen(true)}
             />
           )}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div
+      <motion.div
+        layout
+        layoutId='preview-content-dsad'
         className={cn(
           'markdown-preview min-h-screen dark:bg-markdown-neutral-900 w-full px-4 py-3 md:p-6',
           isPreviewOpen ? 'lg:mx-auto lg:max-w-3xl' : 'block',
         )}
       >
         {parse(html)}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

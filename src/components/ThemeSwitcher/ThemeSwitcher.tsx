@@ -10,8 +10,8 @@ function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex items-center gap-2.5">
-      <MotionMoon
+    <div className="flex items-center  gap-2.5">
+      <MotionSun
         animate={{
           color: theme === "dark" ? "var(--color-markdown-gray-600)" : "white",
         }}
@@ -39,7 +39,7 @@ function ThemeSwitcher() {
           className="size-3 rounded-full bg-white"
         />
       </motion.button>
-      <MotionSun
+      <MotionMoon
         animate={{
           color: theme === "dark" ? "white" : "var(--color-markdown-gray-600)",
         }}

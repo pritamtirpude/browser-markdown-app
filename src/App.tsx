@@ -8,16 +8,15 @@ function App() {
   return (
     <div className='relative'>
       <AnimatePresence mode="wait">{isHamburgerMenuOpen && <Sidebar />}</AnimatePresence>
-      <motion.main
-        className='dark:bg-markdown-neutral-900'
-        animate={{
+      <main className='dark:bg-markdown-neutral-900 overflow-x-hidden'>
+        <motion.div animate={{
           x: isHamburgerMenuOpen ? 250 : 0,
         }}
-        transition={{ ease: 'easeInOut', duration: 0.3 }}
-      >
-        <Navbar />
-        <Editor />
-      </motion.main>
+          transition={{ ease: 'easeInOut', duration: 0.3 }}>
+          <Navbar />
+          <Editor />
+        </motion.div>
+      </main>
     </div>
   );
 }
