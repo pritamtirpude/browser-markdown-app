@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
-
 @theme {
   --color-markdown-neutral-900: hsl(225, 9%, 9%);
   --color-markdown-neutral-700: hsl(216, 9%, 23%);
@@ -80,51 +79,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
-  min-height: 100vh;
-}
-
-.markdown-preview h1 {
-  font-size: var(--text-robotoslab-h1);
-  font-family: var(--font-robotoslab);
-  font-weight: bold;
-}
-
-.markdown-preview h2 {
-  font-size: var(--text-robotoslab-h2);
-  font-family: var(--font-robotoslab);
-  font-weight: 300;
-}
-
-.markdown-preview h3 {
-  font-size: var(--text-robotoslab-h3);
-  font-family: var(--font-robotoslab);
-  font-weight: bold;
-}
-
-.markdown-preview h4 {
-  font-size: var(--text-robotoslab-h4);
-  font-family: var(--font-robotoslab);
-  font-weight: bold;
-}
-
-.markdown-preview h5 {
-  font-size: var(--text-robotoslab-h5);
-  font-family: var(--font-robotoslab);
-  font-weight: bold;
-}
-
-.markdown-preview h6 {
-  font-size: var(--text-robotoslab-h6);
-  font-family: var(--font-robotoslab);
-  font-weight: bold;
-}
-
-.markdown-preview p {
-  font-size: var(--text-robotoslab-regular);
-  line-height: var(--text-robotoslab-regular--line-height);
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  color: var(--color-markdown-zinc-500);
+  height: 100%;
 }
 
 /* Custom Scrollbar */
