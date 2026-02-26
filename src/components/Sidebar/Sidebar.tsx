@@ -32,9 +32,7 @@ function Sidebar() {
       exit={{
         x: '-100%',
       }}
-      className={cn(
-        'bg-markdown-zinc-900 fixed inset-0 flex h-full w-62.5 flex-col  p-6',
-      )}
+      className={cn('bg-markdown-zinc-900 fixed inset-0 flex h-full w-62.5 flex-col p-6')}
     >
       <div className="flex flex-1 flex-col gap-6">
         <div>

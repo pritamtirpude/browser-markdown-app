@@ -10,7 +10,7 @@ function MarkdownEditor() {
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
 
   return (
-    <div className={cn('flex-1', isPreviewOpen ? 'hidden' : 'block')}>
+    <div className={cn('flex flex-1 flex-col', isPreviewOpen ? 'hidden' : 'flex')}>
       <div className="bg-markdown-neutral-100 dark:bg-markdown-zinc-900 flex items-center justify-between px-4 py-3">
         <h3 className="text-markdown-zinc-500 dark:text-markdown-neutral-300 text-roboto-regularhs uppercase">
           Markdown
@@ -35,7 +35,7 @@ function MarkdownEditor() {
         name="markdown"
         value={markdownContent || defaultDocument?.content || ''}
         onChange={(e) => setMarkdownContent(e.target.value)}
-        className="text-robotomono-regular dark:bg-markdown-neutral-900 dark:text-markdown-neutral-300 font-robotomono text-markdown-neutral-700 size-full resize-none p-4 focus:outline-none"
+        className="text-robotomono-regular dark:bg-markdown-neutral-900 dark:text-markdown-neutral-300 font-robotomono text-markdown-neutral-700 flex-1 w-full resize-none overflow-auto p-4 focus:outline-none"
       />
     </div>
   );

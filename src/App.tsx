@@ -6,10 +6,11 @@ function App() {
   const { isHamburgerMenuOpen } = useNavbarStore();
 
   return (
-    <div>
+    <div className="h-screen overflow-hidden">
       <AnimatePresence mode="wait">{isHamburgerMenuOpen && <Sidebar />}</AnimatePresence>
-      <main className="dark:bg-markdown-neutral-900 overflow-hidden">
+      <main className="dark:bg-markdown-neutral-900 flex h-screen flex-col overflow-hidden">
         <motion.div
+          className="flex h-full flex-col"
           animate={{
             x: isHamburgerMenuOpen ? 250 : 0,
           }}

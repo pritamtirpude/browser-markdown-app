@@ -78,7 +78,7 @@ function MarkdownPreview() {
   }, [documents, documentId, setFilename, setMarkdownContent, parseMarkdown]);
 
   return (
-    <div className={cn('hidden flex-1 md:block', isPreviewOpen ? 'block' : 'hidden')}>
+    <div className={cn('hidden flex-1 flex-col md:flex', isPreviewOpen ? 'flex' : 'hidden')}>
       <div className="bg-markdown-neutral-100 dark:bg-markdown-zinc-900 flex items-center justify-between px-4 py-3">
         <h3 className="text-markdown-zinc-500 dark:text-markdown-neutral-300 text-roboto-regularhs uppercase">
           Preview
@@ -100,7 +100,7 @@ function MarkdownPreview() {
 
       <div
         className={cn(
-          'dark:bg-markdown-neutral-900px-4 py-3 md:p-6',
+          'dark:bg-markdown-neutral-900 flex-1 overflow-auto px-4 py-3 md:p-6',
           isPreviewOpen ? 'lg:mx-auto lg:max-w-3xl' : 'block',
         )}
       >
