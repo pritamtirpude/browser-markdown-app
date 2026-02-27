@@ -2,6 +2,7 @@
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
+import rehypeStarryNight from 'rehype-starry-night';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
@@ -18,6 +19,7 @@ export async function renderMarkdown(markdown: string): Promise<MarkdownResult> 
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
+    .use(rehypeStarryNight)
     .use(rehypeSlug)
     .use(rehypeSanitize)
     .use(rehypeStringify)

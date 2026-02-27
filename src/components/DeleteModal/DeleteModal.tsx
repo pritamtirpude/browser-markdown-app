@@ -89,7 +89,7 @@ function DeleteModal() {
           handleClose();
         }}
         ref={ref}
-        className="fixed top-1/2 left-1/2 z-[10000px] flex max-w-85 -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded-lg bg-white p-6 focus:outline-none"
+        className="fixed top-1/2 left-1/2 z-[10000px] flex w-[90%] -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded-lg bg-white p-6 focus:outline-none md:max-w-85"
       >
         <h2 className="font-robotoslab text-robotoslab-h4 text-markdown-neutral-700 font-bold">
           Delete this Document?
@@ -98,7 +98,7 @@ function DeleteModal() {
           Are you sure you want to delete the '{filename}' document and its contents? This action
           cannot be reversed.
         </p>
-        <Button title="Confirm & Delete" handleEvent={handleDeleteDocument} />
+        <Button isMobile={true} title="Confirm & Delete" handleEvent={handleDeleteDocument} />
       </motion.dialog>
     </>
   );

@@ -66,6 +66,20 @@ export const markdownParserOptions: HTMLReactParserOptions = {
         );
       }
 
+      // Special handling for anchor tags to open in new tab
+      if (elementName === 'a') {
+        return (
+          <a
+            className={cn(className, node.attribs?.class)}
+            href={node.attribs?.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {domToReact(node.children as DOMNode[], markdownParserOptions)}
+          </a>
+        );
+      }
+
       // Apply class to the element and recursively process children
       const Tag = elementName;
       return (
