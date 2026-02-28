@@ -1,4 +1,5 @@
 import { cn } from '@/util';
+import { motion } from 'motion/react';
 
 type ButtonProps = {
   title: string;
@@ -8,7 +9,8 @@ type ButtonProps = {
 };
 function Button({ title, icon, handleEvent, isMobile }: ButtonProps) {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.98 }}
       autoFocus={false}
       className={cn(
         'bg-markdown-orange-500 group text-roboto-regular relative z-0 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm p-4 text-white focus:outline-none md:px-4 md:py-2.5',
@@ -21,7 +23,7 @@ function Button({ title, icon, handleEvent, isMobile }: ButtonProps) {
       {!icon && isMobile && <span className="block">{title}</span>}
 
       <div className="group-hover:bg-markdown-orange-300 absolute inset-0 top-full -z-20 size-full transition-all duration-200 ease-in-out group-hover:top-0" />
-    </button>
+    </motion.button>
   );
 }
 

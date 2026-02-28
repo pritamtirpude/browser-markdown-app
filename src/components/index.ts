@@ -9,6 +9,7 @@ import MarkdownEditor from '@/components/MarkdownEditor/MarkdownEditor';
 import MarkdownPreview from '@/components/MarkdownPreview/MarkdownPreview';
 import Navbar from '@/components/Navbar/Navbar';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import SplashScreen from '@/components/SplashScreen/SplashScreen';
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher';
 
 export {
@@ -23,5 +24,6 @@ export {
   MarkdownPreview,
   Navbar,
   Sidebar,
+  SplashScreen,
   ThemeSwitcher,
 };

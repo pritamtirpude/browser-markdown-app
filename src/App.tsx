@@ -1,9 +1,27 @@
-import { Editor, Navbar, Sidebar } from '@/components';
+import { Editor, Navbar, Sidebar, SplashScreen } from '@/components';
 import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { useNavbarStore } from './store/navbarStore';
 
 function App() {
   const { isHamburgerMenuOpen } = useNavbarStore();
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2000); // Show splash for 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showSplash) {
+    return (
+      <AnimatePresence mode="wait">
+        <SplashScreen />
+      </AnimatePresence>
+    );
+  }
 
   return (
     <div className="h-screen overflow-hidden">

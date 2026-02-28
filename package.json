@@ -19,7 +19,7 @@
     "html-react-parser": "^5.2.15",
     "lucide-react": "^0.563.0",
     "motion": "^12.34.2",
-    "motion-plus": "https://api.motion.dev/registry.tgz?package=motion-plus&version=2.10.0&token=b1dd8663551a2a97b59ae09b342cac10f1699eb40aa10aa45f5fb9c38589fd3b",
+    "motion-plus": "https://api.motion.dev/registry.tgz?package=motion-plus&version=2.6.1&token=b1dd8663551a2a97b59ae09b342cac10f1699eb40aa10aa45f5fb9c38589fd3b",
     "nuqs": "^2.8.8",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",

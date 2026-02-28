@@ -86,12 +86,12 @@ function MarkdownPreview() {
         <div title="Preview Markdown">
           {isPreviewOpen ? (
             <EyeOff
-              className="text-markdown-zinc-500 cursor-pointer"
+              className="text-markdown-zinc-500 hover:text-markdown-orange-500 cursor-pointer transition-all duration-200"
               onClick={() => setIsPreviewOpen(false)}
             />
           ) : (
             <Eye
-              className="text-markdown-zinc-500 cursor-pointer"
+              className="text-markdown-zinc-500 hover:text-markdown-orange-500 cursor-pointer transition-all duration-200"
               onClick={() => setIsPreviewOpen(true)}
             />
           )}
