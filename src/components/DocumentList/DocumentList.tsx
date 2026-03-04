@@ -8,7 +8,7 @@ function DocumentList() {
   );
 
   return (
-    <div className="flex w-full flex-col gap-6 overflow-y-auto">
+    <div className="scrollbar-hide flex max-h-125 w-full flex-col gap-6 overflow-y-auto">
       {documents?.map((doc) => (
         <DocumentCard key={doc.id} docData={doc} />
       ))}
