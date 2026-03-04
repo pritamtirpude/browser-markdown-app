@@ -39,6 +39,17 @@ export const markdownParserOptions: HTMLReactParserOptions = {
 
       // Special handling for pre > code blocks
       if (elementName === 'pre') {
+        // Mermaid blocks: preserve as-is so the mermaid library can render them
+        if (node.attribs?.class?.includes('mermaid')) {
+          // Pass data-mermaid-source through so MarkdownPreview can restore
+          // the original source before each mermaid.run() call.
+          return (
+            <pre className="mermaid" data-mermaid-source={node.attribs['data-mermaid-source']}>
+              {domToReact(node.children as DOMNode[], markdownParserOptions)}
+            </pre>
+          );
+        }
+
         const codeChild = node.children.find(
           (child) => child instanceof Element && child.name === 'code',
         );

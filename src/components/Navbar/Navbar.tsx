@@ -17,7 +17,7 @@ function Navbar() {
     db.table('documents').orderBy('createdAt').reverse().toArray(),
   );
 
-  const markdownDocument = documents?.find((doc) => doc.id === documentId || defaultDocument?.id);
+  const markdownDocument = documents?.find((doc) => doc.id === (documentId || defaultDocument?.id));
 
   const handleSave = async () => {
     if (!filename && !markdownContent) {

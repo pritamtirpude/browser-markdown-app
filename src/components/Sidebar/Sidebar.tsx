@@ -35,8 +35,8 @@ function Sidebar() {
       className={cn('bg-markdown-zinc-900 fixed inset-0 flex h-full w-62.5 flex-col p-6')}
     >
       <div className="flex flex-1 flex-col gap-6">
-        <div>
-          <img className="lg:hidden" src="/assets/logo.svg" alt="markdown logo" loading="lazy" />
+        <div className="lg:hidden">
+          <img src="/assets/logo.svg" alt="markdown logo" loading="lazy" />
         </div>
         <div>
           <span className="text-roboto-regularhs text-markdown-zinc-500 uppercase">

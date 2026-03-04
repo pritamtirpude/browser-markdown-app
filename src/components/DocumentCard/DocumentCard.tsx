@@ -8,11 +8,19 @@ type DocumentCardProps = {
 };
 
 function DocumentCard({ docData }: DocumentCardProps) {
-  const { setDocumentId, documentId } = useMarkdownStore((state) => state);
+  const { setDocumentId, setMarkdownContent, setFilename, documentId } = useMarkdownStore(
+    (state) => state,
+  );
+
+  const handleSelectDocument = () => {
+    setDocumentId(docData.id);
+    setMarkdownContent(docData.content);
+    setFilename(docData.title);
+  };
 
   return (
     <div
-      onClick={() => setDocumentId(docData.id)}
+      onClick={handleSelectDocument}
       className="flex cursor-pointer items-center gap-4"
     >
       <div>

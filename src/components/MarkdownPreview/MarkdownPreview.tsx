@@ -6,7 +6,8 @@ import { markdownParserOptions } from '@/util/markdownStyles';
 import { useLiveQuery } from 'dexie-react-hooks';
 import parse from 'html-react-parser';
 import { Eye, EyeOff } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import mermaid from 'mermaid';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 function MarkdownPreview() {
   const {
@@ -24,6 +25,27 @@ function MarkdownPreview() {
   );
 
   const [html, setHtml] = useState('');
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  // Helper: re-initialize mermaid with the correct theme, then run
+  const runMermaid = useCallback(() => {
+    if (!previewRef.current) return;
+    const mermaidElements = previewRef.current.querySelectorAll<HTMLElement>('pre.mermaid');
+    if (mermaidElements.length === 0) return;
+
+    const isDark = document.documentElement.classList.contains('dark');
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDark ? 'dark' : 'base',
+    });
+
+    mermaidElements.forEach((el) => {
+      const source = el.getAttribute('data-mermaid-source');
+      if (source) el.textContent = source;
+      el.removeAttribute('data-processed');
+    });
+    mermaid.run({ nodes: mermaidElements });
+  }, []);
 
   // Memoized render function - returns the rendered result without setting state
   const parseMarkdown = useCallback(async (content: string) => {
@@ -67,6 +89,21 @@ function MarkdownPreview() {
     }
   }, [markdownContent, parseMarkdown]);
 
+  // Run mermaid rendering after HTML is updated in the DOM
+  useEffect(() => {
+    if (html) runMermaid();
+  }, [html, runMermaid]);
+
+  // Re-render mermaid diagrams when the dark/light theme changes
+  useEffect(() => {
+    const observer = new MutationObserver(() => runMermaid());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
+  }, [runMermaid]);
+
   useEffect(() => {
     const document = documents?.find((doc) => doc.id === documentId);
 
@@ -99,6 +136,7 @@ function MarkdownPreview() {
       </div>
 
       <div
+        ref={previewRef}
         className={cn(
           'dark:bg-markdown-neutral-900 flex-1 overflow-auto px-4 py-3 md:p-6',
           isPreviewOpen ? 'lg:mx-auto lg:max-w-3xl' : 'block',
