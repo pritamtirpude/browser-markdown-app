@@ -61,6 +61,13 @@ This markdown editor allows for inline-code snippets, like this:
   <h1>This is a larger code block</h1>
 </main>
 \`\`\`
+\`\`\`mermaid
+pie title Browser Usage
+    "Chrome" : 65
+    "Firefox" : 15
+    "Safari" : 12
+    "Edge" : 8
+\`\`\`
 `;
 
 db.on('populate', (tx) => {

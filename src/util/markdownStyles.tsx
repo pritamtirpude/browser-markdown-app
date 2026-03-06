@@ -91,6 +91,17 @@ export const markdownParserOptions: HTMLReactParserOptions = {
         );
       }
 
+      // Special handling for void elements (e.g. img) that cannot have children
+      if (elementName === 'img') {
+        return (
+          <img
+            className={cn(className, node.attribs?.class)}
+            src={node.attribs?.src}
+            alt={node.attribs?.alt ?? ''}
+          />
+        );
+      }
+
       // Apply class to the element and recursively process children
       const Tag = elementName;
       return (
