@@ -1,10 +1,12 @@
-import { Editor, Navbar, Sidebar, SplashScreen } from '@/components';
+import { Editor, Navbar, SavingScreen, Sidebar, SplashScreen } from '@/components';
+import { useMarkdownStore } from '@/store/markdownStore';
+import { useNavbarStore } from '@/store/navbarStore';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { useNavbarStore } from './store/navbarStore';
 
 function App() {
   const { isHamburgerMenuOpen } = useNavbarStore();
+  const { isSavingDocument } = useMarkdownStore();
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
@@ -38,6 +40,7 @@ function App() {
           <Editor />
         </motion.div>
       </main>
+      <AnimatePresence mode="wait">{isSavingDocument && <SavingScreen />}</AnimatePresence>
     </div>
   );
 }

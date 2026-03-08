@@ -3,6 +3,7 @@ import { db } from '@/indexeddb/db';
 import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
 import { cn } from '@/util';
+import { useHotkey } from '@tanstack/react-hotkeys';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { motion } from 'motion/react';
 
@@ -20,6 +21,10 @@ function Sidebar() {
     setFilename(title);
     setMarkdownContent(content);
   };
+
+  useHotkey('N', () => {
+    handleNewDocument();
+  });
 
   return (
     <motion.aside
