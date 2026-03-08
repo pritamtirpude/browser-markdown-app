@@ -2,8 +2,8 @@ import { db } from '@/indexeddb/db';
 import { useMarkdownStore } from '@/store/markdownStore';
 import { cn } from '@/util';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useEffect } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useEffect } from 'react';
 
 function MarkdownEditor() {
   const {
@@ -15,16 +15,26 @@ function MarkdownEditor() {
     setDocumentId,
     setFilename,
   } = useMarkdownStore();
+  const documents = useLiveQuery(() =>
+    db.table('documents').orderBy('createdAt').reverse().toArray(),
+  );
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
 
-  // Initialize store with default document on first load
+  // Initialize store with the most recent document, falling back to the default
   useEffect(() => {
-    if (!documentId && defaultDocument) {
-      setDocumentId(defaultDocument.id);
-      setMarkdownContent(defaultDocument.content);
-      setFilename(defaultDocument.title);
+    if (!documentId && documents !== undefined) {
+      if (documents.length > 0) {
+        const firstDoc = documents[0];
+        setDocumentId(firstDoc.id);
+        setMarkdownContent(firstDoc.content);
+        setFilename(firstDoc.title);
+      } else if (defaultDocument) {
+        setDocumentId(defaultDocument.id);
+        setMarkdownContent(defaultDocument.content);
+        setFilename(defaultDocument.title);
+      }
     }
-  }, [defaultDocument, documentId, setDocumentId, setMarkdownContent, setFilename]);
+  }, [documents, defaultDocument, documentId, setDocumentId, setMarkdownContent, setFilename]);
 
   return (
     <div className={cn('flex flex-1 flex-col', isPreviewOpen ? 'hidden' : 'flex')}>
@@ -52,7 +62,7 @@ function MarkdownEditor() {
         name="markdown"
         value={markdownContent}
         onChange={(e) => setMarkdownContent(e.target.value)}
-        className="text-robotomono-regular dark:bg-markdown-neutral-900 dark:text-markdown-neutral-300 font-robotomono text-markdown-neutral-700 flex-1 w-full resize-none overflow-auto p-4 focus:outline-none"
+        className="text-robotomono-regular dark:bg-markdown-neutral-900 dark:text-markdown-neutral-300 font-robotomono text-markdown-neutral-700 w-full flex-1 resize-none overflow-auto p-4 focus:outline-none"
       />
     </div>
   );

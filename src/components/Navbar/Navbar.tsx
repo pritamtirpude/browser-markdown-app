@@ -1,17 +1,22 @@
-import { Button, DeleteModal, FilenameInput, HamburgerMenu } from '@/components';
+import { Button, CommandPalette, DeleteModal, FilenameInput, HamburgerMenu } from '@/components';
 import { db } from '@/indexeddb/db';
 import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
 import { useNavbarStore } from '@/store/navbarStore';
+import { useHotkey } from '@tanstack/react-hotkeys';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { Trash2 } from 'lucide-react';
+import { Command, Trash2 } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 
 function Navbar() {
-  const { markdownContent, filename, documentId, setDocumentId } = useMarkdownStore(
-    (state) => state,
-  );
-  const { isDeleteConfirmationOpen, setDeleteConfirmation } = useNavbarStore();
+  const { markdownContent, filename, documentId, setDocumentId, setIsSavingDocument } =
+    useMarkdownStore((state) => state);
+  const {
+    isDeleteConfirmationOpen,
+    setDeleteConfirmation,
+    setIsCommandPaletteOpen,
+    isCommandPaletteOpen,
+  } = useNavbarStore();
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
   const documents = useLiveQuery(() =>
     db.table('documents').orderBy('createdAt').reverse().toArray(),
@@ -25,13 +30,19 @@ function Navbar() {
       return;
     }
 
+    setIsSavingDocument(true);
     await addOrUpdateDocument(
       filename,
       markdownContent,
       markdownDocument?.id ?? undefined,
       setDocumentId,
     );
+    setTimeout(() => setIsSavingDocument(false), 1500);
   };
+
+  useHotkey('Mod+S', () => {
+    handleSave();
+  });
 
   return (
     <nav className="bg-markdown-zinc-800 sticky inset-0 z-50 flex w-full">
@@ -57,7 +68,19 @@ function Navbar() {
           </div>
         </div>
         <div className="flex items-center gap-6">
-          <div>
+          <div
+            title="Keyboard Shortcuts"
+            className="relative"
+            onMouseEnter={() => setIsCommandPaletteOpen(true)}
+            onMouseLeave={() => setIsCommandPaletteOpen(false)}
+          >
+            <Command className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200" />
+
+            <AnimatePresence mode="wait">
+              {isCommandPaletteOpen && <CommandPalette />}
+            </AnimatePresence>
+          </div>
+          <div title="Delete Document">
             <Trash2
               onClick={() => setDeleteConfirmation(true)}
               className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200"

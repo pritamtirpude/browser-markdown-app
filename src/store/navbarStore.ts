@@ -5,6 +5,8 @@ type NavbarStoreState = {
   toggleHamburgerMenu: () => void;
   isDeleteConfirmationOpen: boolean;
   setDeleteConfirmation: (deleteConfirmation: boolean) => void;
+  isCommandPaletteOpen: boolean;
+  setIsCommandPaletteOpen: (isCommandPaletteOpen: boolean) => void;
 };
 
 export const useNavbarStore = create<NavbarStoreState>((set) => ({
@@ -13,4 +15,6 @@ export const useNavbarStore = create<NavbarStoreState>((set) => ({
   isDeleteConfirmationOpen: false,
   setDeleteConfirmation: (deleteConfirmation: boolean) =>
     set({ isDeleteConfirmationOpen: deleteConfirmation }),
+  isCommandPaletteOpen: false,
+  setIsCommandPaletteOpen: (isCommandPaletteOpen: boolean) => set({ isCommandPaletteOpen }),
 }));

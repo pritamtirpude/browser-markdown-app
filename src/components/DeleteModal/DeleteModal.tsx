@@ -4,6 +4,7 @@ import { db } from '@/indexeddb/db';
 import { deleteDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
 import { useNavbarStore } from '@/store/navbarStore';
+import { useHotkey } from '@tanstack/react-hotkeys';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -71,6 +72,18 @@ function DeleteModal() {
 
   // Only attach listener after dialog is fully open
   useClickOutside(ref, handleClose, isOpen);
+
+  useHotkey(
+    'Escape',
+    () => {
+      handleClose();
+    },
+    { enabled: isOpen },
+  );
+
+  useHotkey('D', () => {
+    handleDeleteDocument();
+  });
 
   return (
     <>

@@ -9,6 +9,8 @@ type MarkdownStoreState = {
   setDocumentId: (id: string) => void;
   isPreviewOpen: boolean;
   setIsPreviewOpen: (isOpen: boolean) => void;
+  isSavingDocument: boolean;
+  setIsSavingDocument: (isSaving: boolean) => void;
 };
 
 export const useMarkdownStore = create<MarkdownStoreState>((set) => ({
@@ -20,4 +22,6 @@ export const useMarkdownStore = create<MarkdownStoreState>((set) => ({
   setDocumentId: (id) => set({ documentId: id }),
   isPreviewOpen: false,
   setIsPreviewOpen: (isOpen) => set({ isPreviewOpen: isOpen }),
+  isSavingDocument: false,
+  setIsSavingDocument: (isSaving) => set({ isSavingDocument: isSaving }),
 }));

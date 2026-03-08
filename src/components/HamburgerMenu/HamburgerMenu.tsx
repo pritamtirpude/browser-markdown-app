@@ -1,8 +1,12 @@
 import { useNavbarStore } from '@/store/navbarStore';
+import { useHotkey } from '@tanstack/react-hotkeys';
 import { motion, MotionConfig } from 'motion/react';
 
 function HamburgerMenu() {
   const { toggleHamburgerMenu, isHamburgerMenuOpen } = useNavbarStore();
+  useHotkey('Alt+Backspace', () => {
+    toggleHamburgerMenu();
+  });
   return (
     <MotionConfig transition={{ duration: 0.2 }}>
       <button
