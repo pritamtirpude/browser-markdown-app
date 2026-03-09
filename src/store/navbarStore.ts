@@ -7,6 +7,8 @@ type NavbarStoreState = {
   setDeleteConfirmation: (deleteConfirmation: boolean) => void;
   isCommandPaletteOpen: boolean;
   setIsCommandPaletteOpen: (isCommandPaletteOpen: boolean) => void;
+  isDownloadDocumentOpen: boolean;
+  setIsDownloadDocumentOpen: (isDownloadDocumentOpen: boolean) => void;
 };
 
 export const useNavbarStore = create<NavbarStoreState>((set) => ({
@@ -17,4 +19,6 @@ export const useNavbarStore = create<NavbarStoreState>((set) => ({
     set({ isDeleteConfirmationOpen: deleteConfirmation }),
   isCommandPaletteOpen: false,
   setIsCommandPaletteOpen: (isCommandPaletteOpen: boolean) => set({ isCommandPaletteOpen }),
+  isDownloadDocumentOpen: false,
+  setIsDownloadDocumentOpen: (isDownloadDocumentOpen: boolean) => set({ isDownloadDocumentOpen }),
 }));

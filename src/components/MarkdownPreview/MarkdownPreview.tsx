@@ -137,6 +137,7 @@ function MarkdownPreview() {
 
       <div
         ref={previewRef}
+        data-print-preview
         className={cn(
           'dark:bg-markdown-neutral-900 flex-1 overflow-auto px-4 py-3 md:p-6',
           isPreviewOpen ? 'lg:mx-auto lg:max-w-3xl' : 'block',

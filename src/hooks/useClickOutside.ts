@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
 function useClickOutside(
-  ref: React.RefObject<HTMLDialogElement | null>,
+  ref: React.RefObject<HTMLDialogElement | HTMLDivElement | null>,
   close: VoidFunction,
-  enabled: boolean = true
+  enabled: boolean = true,
 ) {
   useEffect(() => {
     if (!enabled) return;
@@ -23,7 +23,7 @@ function useClickOutside(
   }, [ref, close, enabled]);
 }
 
-function checkClickOutside(event: MouseEvent, element: HTMLDialogElement) {
+function checkClickOutside(event: MouseEvent, element: HTMLDialogElement | HTMLDivElement) {
   const { top, left, width, height } = element.getBoundingClientRect();
 
   if (
