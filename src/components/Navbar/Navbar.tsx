@@ -1,11 +1,18 @@
-import { Button, CommandPalette, DeleteModal, FilenameInput, HamburgerMenu } from '@/components';
+import {
+  Button,
+  CommandPalette,
+  DeleteModal,
+  DownloadDropdown,
+  FilenameInput,
+  HamburgerMenu,
+} from '@/components';
 import { db } from '@/indexeddb/db';
 import { addOrUpdateDocument } from '@/indexeddb/helperMethods';
 import { useMarkdownStore } from '@/store/markdownStore';
 import { useNavbarStore } from '@/store/navbarStore';
 import { useHotkey } from '@tanstack/react-hotkeys';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { Command, Trash2 } from 'lucide-react';
+import { Command, Download, Trash2 } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 
 function Navbar() {
@@ -16,6 +23,8 @@ function Navbar() {
     setDeleteConfirmation,
     setIsCommandPaletteOpen,
     isCommandPaletteOpen,
+    setIsDownloadDocumentOpen,
+    isDownloadDocumentOpen,
   } = useNavbarStore();
   const defaultDocument = useLiveQuery(() => db.table('defaultDocument').toCollection().first());
   const documents = useLiveQuery(() =>
@@ -67,14 +76,24 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 md:gap-6">
+          <div
+            onClick={() => setIsDownloadDocumentOpen(true)}
+            title="Export Document"
+            className="relative"
+          >
+            <Download className="hover:text-markdown-orange-500 text-markdown-gray-600 size-4 cursor-pointer transition-all duration-200 md:size-6" />
+            <AnimatePresence mode="wait">
+              {isDownloadDocumentOpen && <DownloadDropdown />}
+            </AnimatePresence>
+          </div>
           <div
             title="Keyboard Shortcuts"
             className="relative"
             onMouseEnter={() => setIsCommandPaletteOpen(true)}
             onMouseLeave={() => setIsCommandPaletteOpen(false)}
           >
-            <Command className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200" />
+            <Command className="hover:text-markdown-orange-500 text-markdown-gray-600 size-4 cursor-pointer transition-all duration-200 md:size-6" />
 
             <AnimatePresence mode="wait">
               {isCommandPaletteOpen && <CommandPalette />}
@@ -83,7 +102,7 @@ function Navbar() {
           <div title="Delete Document">
             <Trash2
               onClick={() => setDeleteConfirmation(true)}
-              className="hover:text-markdown-orange-500 text-markdown-gray-600 cursor-pointer transition-all duration-200"
+              className="hover:text-markdown-orange-500 text-markdown-gray-600 size-4 cursor-pointer transition-all duration-200 md:size-6"
             />
           </div>
           <Button title="Save Changes" icon="/assets/icon-save.svg" handleEvent={handleSave} />

@@ -3,6 +3,7 @@ import CommandPalette from '@/components/CommandPalette/CommandPalette';
 import DeleteModal from '@/components/DeleteModal/DeleteModal';
 import DocumentCard from '@/components/DocumentCard/DocumentCard';
 import DocumentList from '@/components/DocumentList/DocumentList';
+import DownloadDropdown from '@/components/DownloadDropdown/DownloadDropdown';
 import Editor from '@/components/Editor/Editor';
 import FilenameInput from '@/components/FilenameInput/FilenameInput';
 import HamburgerMenu from '@/components/HamburgerMenu/HamburgerMenu';
@@ -20,6 +21,7 @@ export {
   DeleteModal,
   DocumentCard,
   DocumentList,
+  DownloadDropdown,
   Editor,
   FilenameInput,
   HamburgerMenu,

@@ -14,7 +14,7 @@ function Button({ title, icon, handleEvent, isMobile }: ButtonProps) {
       autoFocus={false}
       className={cn(
         'bg-markdown-orange-500 group text-roboto-regular relative z-0 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm p-4 text-white focus:outline-none md:px-4 md:py-2.5',
-        icon ? 'gap-2' : '',
+        icon ? 'gap-2 p-2' : '',
       )}
       onClick={handleEvent}
     >
