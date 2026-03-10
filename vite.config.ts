@@ -46,6 +46,26 @@ export default defineConfig({
             purpose: 'maskable',
           },
         ],
+        screenshots: [
+          {
+            src: '/screenshot-wide-one.png',
+            sizes: '2559x1359',
+            type: 'image/png',
+            form_factor: 'wide',
+          },
+          {
+            src: '/screenshot-wide-two.png',
+            sizes: '2559x1359',
+            type: 'image/png',
+            form_factor: 'wide',
+          },
+          {
+            src: '/screenshot-narrow-one.png',
+            sizes: '750x1334',
+            type: 'image/png',
+            form_factor: 'narrow',
+          },
+        ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
