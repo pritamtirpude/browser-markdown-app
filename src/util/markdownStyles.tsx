@@ -27,7 +27,7 @@ const markdownClasses = {
   th: 'border border-markdown-neutral-300 dark:border-markdown-gray-600 px-4 py-2 text-left font-bold text-markdown-neutral-900 dark:text-white',
   td: 'border border-markdown-neutral-300 dark:border-markdown-gray-600 px-4 py-2',
   tr: 'border-b border-markdown-neutral-300 dark:border-markdown-gray-600',
-  img: 'size-full object-cover rounded-lg my-4',
+  img: 'w-auto h-full object-cover rounded-lg my-4',
 };
 
 // Parser options to add Tailwind classes to markdown elements

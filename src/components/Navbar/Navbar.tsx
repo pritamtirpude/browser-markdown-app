@@ -53,6 +53,10 @@ function Navbar() {
     handleSave();
   });
 
+  useHotkey('D', () => {
+    setDeleteConfirmation(true);
+  });
+
   return (
     <nav className="bg-markdown-zinc-800 sticky inset-0 z-50 flex w-full">
       <HamburgerMenu />
