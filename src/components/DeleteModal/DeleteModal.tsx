@@ -81,10 +81,6 @@ function DeleteModal() {
     { enabled: isOpen },
   );
 
-  useHotkey('D', () => {
-    handleDeleteDocument();
-  });
-
   return (
     <>
       <motion.div
