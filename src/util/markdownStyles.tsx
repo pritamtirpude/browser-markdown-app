@@ -28,6 +28,10 @@ const markdownClasses = {
   td: 'border border-markdown-neutral-300 dark:border-markdown-gray-600 px-4 py-2',
   tr: 'border-b border-markdown-neutral-300 dark:border-markdown-gray-600',
   img: 'w-auto h-full object-cover rounded-lg my-4',
+  details:
+    'border border-markdown-neutral-300 dark:border-markdown-gray-600 rounded-lg mb-4 bg-markdown-neutral-100 dark:bg-markdown-zinc-800',
+  summary:
+    'cursor-pointer px-4 py-2.5 font-semibold text-[0.875rem] text-markdown-neutral-900 dark:text-white select-none hover:bg-markdown-neutral-200 dark:hover:bg-markdown-zinc-500 rounded-lg',
 };
 
 // Parser options to add Tailwind classes to markdown elements
@@ -88,6 +92,25 @@ export const markdownParserOptions: HTMLReactParserOptions = {
           >
             {domToReact(node.children as DOMNode[], markdownParserOptions)}
           </a>
+        );
+      }
+
+      // Special handling for details to wrap content children in a padded div
+      if (elementName === 'details') {
+        const summaryChild = node.children.find(
+          (child) => child instanceof Element && child.name === 'summary',
+        );
+        const contentChildren = node.children.filter(
+          (child) => !(child instanceof Element && child.name === 'summary'),
+        );
+
+        return (
+          <details className={cn(className, node.attribs?.class)}>
+            {summaryChild && domToReact([summaryChild as DOMNode], markdownParserOptions)}
+            <div className="px-4 pt-1 pb-3">
+              {domToReact(contentChildren as DOMNode[], markdownParserOptions)}
+            </div>
+          </details>
         );
       }
 
